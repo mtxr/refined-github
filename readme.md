@@ -41,7 +41,10 @@ GitHub Enterprise is also supported. More info in the options.
 </div>
 
 ---
-
+<details>
+	<summary><h1>Sup</h1> dude?</summary>
+	<h2>Not</h2> much
+</details>
 ## Highlights 🔥
 
 <table>
