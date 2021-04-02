@@ -1,4 +1,4 @@
-import {getCurrentCommittish} from '.';
+import {getCurrentBranch} from '.';
 
 export default class GitHubURL {
 	// @ts-expect-error https://github.com/microsoft/TypeScript/issues/26792
@@ -46,11 +46,13 @@ export default class GitHubURL {
 
 		const filePath = ambiguousReference.slice(1).join('/');
 
-		const currentBranch = getCurrentCommittish();
-		const currentBranchSections = currentBranch?.split('/');
+		const currentBranch = getCurrentBranch();
+		if (!currentBranch) {
+			throw new Error('GitHubURL can only be used on pages with a branch/reference.');
+		}
+
+		const currentBranchSections = currentBranch.split('/');
 		if (
-			!currentBranch || // Current branch could not be determined (1/2)
-			!currentBranchSections || // Current branch could not be determined (2/2)
 			ambiguousReference.length === 1 || // Ref has no slashes
 			currentBranchSections.length === 1 // Current branch has no slashes
 		) {
